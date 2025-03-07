@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<!-- onmousemove pairs with JS to handle background animation with mouse movement -->
+<html lang="en" class="scroll-smooth" onmousemove="moveBackground(event)">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Update favicon href attribute with for browser tab icon -->
+    <link rel="icon" href="assets/icons/logo-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Your name here -->
+    <title>John Doe</title>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        content: ["./src/**/*.{html,js}"],
+        theme: {
+          extend: {
+            keyframes: {
+              mouse: {
+                "0%": { transform: "translateY(3px)" },
+                "100%": { transform: "translateY(-3px)" },
+              },
+              jump: {
+                "0%": { transform: "translateY(-6px)" },
+                "100%": { transform: "translateY(-0px)" },
+              },
+            },
+            animation: {
+              mouse: "mouse 1s infinite alternate-reverse",
+              jump: "jump 1s infinite alternate-reverse",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-stone-100 dark:bg-[#242424] dark:transition-all dark:duration-700 dark:ease-in-out transition-all duration-700 ease-in-out"
+  >
+    <!-- HERO SECTION -->
+    <section id="hero" class="h-dvh">
+      <!-- NAV SECTION -->
+      <nav
+        class="flex justify-between items-center w-full max-w-[1200px] my-0 px-6 mx-auto h-[100px]"
+      >
+        <figure>
+          <!-- NAV LOGO -->
+          <img
+            id="personal-logo"
+            src="./assets/icons/logo-icon.svg"
+            alt="personal logo"
+            class="hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out [64px] h-[64px]"
+          />
+        </figure>
+        <!-- NAV MENU -->
+        <ul class="flex items-center">
+          <!-- ABOUT MENU LINK -->
+          <li class="mx-3 my-0">
+            <a
+              href="#"
+              class="nav__menu relative invisible md:visible hover:text-violet-400 duration-300 ease-in-out no-underline text-[16px] md:text-[20px] text-[#242424] font-bold hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-violet-400 before:absolute before:left-0 before:-bottom-[2px] dark:text-stone-100 dark:transition-all dark:duration-300 dark:ease-in-out"
+            >
+              About
+            </a>
+          </li>
+          <!-- PROJECTS MENU LINK -->
+          <li class="my-0 mx-[12px]">
+            <a
+              href="#projects"
+              class="nav__menu relative hover:text-violet-400 duration-300 ease-in-out no-underline text-[16px] md:text-[20px] text-[#242424] font-bold hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-violet-400 before:absolute before:left-0 before:-bottom-[2px] dark:text-stone-100 dark:transition-all dark:duration-300 dark:ease-in-out"
+            >
+              Projects
+            </a>
+          </li>
+          <!-- CONTACT MENU LINK -->
+          <li class="mx-[12px] my-0" onclick="toggleModal()">
+            <a
+              href="#"
+              class="nav__menu relative hover:text-violet-400 duration-300 ease-in-out no-underline text-[16px] md:text-[20px] text-[#242424] font-bold hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-violet-400 before:absolute before:left-0 before:-bottom-[2px] dark:text-stone-100 dark:transition-all dark:duration-300 dark:ease-in-out"
+            >
+              Contact
+            </a>
+          </li>
+          <!-- LIGHT/DARK MODE TOGGLE -->
+          <li
+            class="my-0 mx-[12px] hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out animate-pulse"
+            onclick="toggleContrast()"
+          >
+            <a
+              href="#"
+              class="no-underline text-base text-[#242424] font-bold dark:text-stone-100 dark:transition-all dark:duration-300 dark:ease-in-out"
+              ><img
+                src="assets/icons/dark-mode-svgrepo-com.svg"
+                alt="LinkedIn logo"
+                class="h-6"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+      <header
+        class="header absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 w-full max-w-[1000px] px-[30px] lg:max-w-[1200px] lg:px-6"
+      >
+        <!-- HERO MAIN CONTENT -->
+        <div class="header__content">
+          <!-- Replace with your name and job title -->
+          <h1
+            class="title text-[52px]/none lg:text-[60px]/none font-bold mb-2 dark:text-stone-100 dark:transition-all dark:duration-700 dark:ease-in-out transition-all duration-700 ease-in-out"
+          >
+            Hey
+          </h1>
+          <h1
+            class="title text-[52px]/none lg:text-[60px]/none font-bold text-violet-400 mb-4"
+          >
+            I'm John Doe.
+          </h1>
+          <p
+            class="bg-stone-100/50 header__para lg:text-[22px]/loose text-[18px]/loose max-w-[500px] transition-all duration-700 ease-in-out dark:bg-[#242424]/50 dark:text-stone-100 dark:transition-all dark:duration-700 dark:ease-in-out"
+          >
+            <!-- Add your own intro paragraph -->
+            I'm a
+            <b class="text-violet-400">Frontend Software Developer</b> with a
+            strong passion for building web applications with great user
+            experiences.
+            <br />
+            Here's a bit more
+            <a href="#" onclick="toggleModal()">
+              <b class="text-violet-400"> about me. </b>
+            </a>
+          </p>
+          <!-- HERO ICON LINKS -->
+          <ul class="flex my-4">
+            <!-- LINKEDIN ICON LINK -->
+            <li
+              class="bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out shadow-[0_4px_10px_0_rgba(0,0,0,0.28)]"
+            >
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                class="flex items-center justify-center w-8 h-8 text-base no-underline text-stone-100 lg:w-10 lg:h-10"
+              >
+                <img
+                  src="assets/icons/linkedin-161-svgrepo-com.svg"
+                  alt="LinkedIn logo"
+                  class="h-5"
+              /></a>
+            </li>
+            <!-- GITHUB ICON LINK -->
+            <li
+              class="bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out shadow-[0_4px_10px_0_rgba(0,0,0,0.28)]"
+            >
+              <a
+                href="https://github.com/"
+                target="_blank"
+                class="flex items-center justify-center w-8 h-8 text-base no-underline text-stone-100 lg:w-10 lg:h-10"
+                ><img
+                  src="assets/icons/github-142-svgrepo-com.svg"
+                  alt="GitHub logo"
+                  class="h-6"
+                />
+              </a>
+            </li>
+            <!-- RESUME ICON LINK -->
+            <li
+              class="bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out shadow-[0_4px_10px_0_rgba(0,0,0,0.28)]"
+            >
+              <a
+                href="#"
+                target="_blank"
+                class="flex items-center justify-center w-8 h-8 text-base no-underline text-stone-100 lg:w-10 lg:h-10"
+              >
+                <img
+                  src="assets/icons/document-text-svgrepo-com.svg"
+                  alt="Resume logo"
+                  class="h-6"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <!-- MAIL CONTACT STICKY BUTTON -->
+      <button
+        class="dark__invert--BGcolor dark__shadow fixed bottom-[32px] right-[40px] w-[70px] h-[70px] text-[32px] rounded-full bg-[#242424] shadow-[0_12px_30px_0_rgba(0,0,0,0.28)] hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out z-10 dark:bg-stone-100 dark:shadow-[0_12px_30px_0_rgba(245,245,244,0.18)] dark:transition-all dark:duration-300 dark:ease-in-out"
+        onclick="toggleModal()"
+      >
+        <a href="#" class="flex align-center justify-center">
+          <img
+            src="assets/icons/email-svgrepo-com.svg"
+            alt="Email logo"
+            class="h-8"
+          />
+        </a>
+      </button>
+      <!-- SCROLL MOUSE ICON -->
+      <a
+        href="#projects"
+        class="flex justify-center items-center absolute bottom-[20px] left-2/4 -translate-x-2/4 w-[20px] h-[30px] border-2 border-[#242424] rounded-3xl hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out dark:border-stone-100"
+      >
+        <span
+          class="w-[4px] h-[6px] bg-[#242424] border-3 rounded-full animate-mouse dark:bg-stone-100 dark:transition-all dark:duration-300 dark:ease-in-out"
+        ></span>
+      </a>
+      <!-- MODAL CONTACT PAGE -->
+      <div
+        class="absolute invisible -z-10 modal md:top-2/4 md:left-2/4 md:w-[90%] place-content-center max-w-[1100px] md:h-[700px] md:rounded-[20px] rounded-b-[20px] h-auto top-0 left-0 overflow-hidden md:-translate-x-2/4 md:-translate-y-2/4 flex flex-col-reverse md:flex-row justify-center"
+      >
+        <!-- WHITE MODAL ABOUT PAGE -->
+        <div
+          class="md:w-2/4 w-full modal__half modal__white bg-stone-100 md:py-[40px] pt-[24px] pb-[40px] md:px-[72px] px-[40px] flex flex-col justify-center relative transition-all duration-300 ease-in -translate-x-[110%]"
+        >
+          <h3 class="modal__title--about text-[26px]">
+            <b>Here's a bit about me.</b>
+          </h3>
+          <!-- Add your title  -->
+          <h4
+            class="modal__sub-title--about text-[14px] mb-[24px] mt-[12px] mx-0"
+          >
+            <b>Frontend Software Engineer.</b>
+          </h4>
+          <!-- Add your name and description of yourself -->
+          <p class="leading-loose modal__para--about mb-[6px]">
+            My name is <b class="text-violet-400">John Doe</b> and I am a
+            <b class="text-violet-400">frontend software developer</b> with a
+            passion for developing websites.
+            <br />
+          </p>
+          <!-- WHITE MODAL ABOUT ME LANGUAGES -->
+          <div class="flex flex-wrap modal__languages">
+            <figure
+              class="modal__HTML relative p-[16px] flex flex-col items-center w-1/4 group"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/240px-HTML5_Badge.svg.png"
+                alt="HTML logo"
+                class="modal__language--HTML group-hover:scale-[0.9] group-hover:brightness-[0.80] duration-300 ease-in-out"
+              />
+            </figure>
+            <figure
+              class="modal__CSS relative p-[16px] flex flex-col items-center w-1/4 group"
+            >
+              <img
+                src="https://cdn.iconscout.com/icon/free/png-256/css-131-722685.png"
+                alt="CSS logo"
+                class="modal__language--CSS group-hover:scale-[0.9] group-hover:brightness-[0.80] duration-300 ease-in-out"
+              />
+            </figure>
+            <figure
+              class="modal__JS relative p-[16px] flex flex-col items-center w-1/4 group"
+            >
+              <img
+                src="https://cdn.iconscout.com/icon/free/png-256/javascript-1-225993.png"
+                alt="JavaScript logo"
+                class="modal__language--JS group-hover:scale-[0.9] group-hover:brightness-[0.80] duration-300 ease-in-out"
+              />
+            </figure>
+            <figure
+              class="modal__React relative p-[16px] flex flex-col items-center w-1/4 group"
+            >
+              <img
+                src="https://cdn.iconscout.com/icon/free/png-256/react-3-1175109.png"
+                alt="React logo"
+                class="modal__language--React group-hover:scale-[0.9] group-hover:brightness-[0.80] duration-300 ease-in-out"
+              />
+            </figure>
+          </div>
+        </div>
+        <!-- BLACK MODAL CONTACT FORM -->
+        <div
+          class="modal__half modal__black bg-[#242424] text-white md:w-2/4 w-full py-[40px] md:px-[72px] px-[40px] flex flex-col justify-center relative transition-all duration-300 ease-in translate-x-[110%] z-70"
+        >
+          <h3 class="modal__title--contact text-[26px]">
+            <b>Let's have a chat!</b>
+          </h3>
+          <h4
+            class="modal__sub-title--contact text-[14px] mb-[24px] mt-[12px] mx-0"
+          >
+            <b>I'm currently open to new opportunities.</b>
+          </h4>
+          <form
+            id="contact__form"
+            onsubmit="contact(event)"
+            class="form__container--contact"
+          >
+            <div class="form__name mb-[20px]">
+              <label for="name" class="form__name--label text-[14px]"
+                ><b>Name</b></label
+              >
+              <input
+                type="text"
+                name="user_name"
+                class="form__name--input"
+                required
+              />
+            </div>
+            <div class="form__email mb-[20px]">
+              <label for="email" class="form__email--label text-[14px]"
+                ><b>Email</b></label
+              >
+              <input
+                type="email"
+                name="user_email"
+                class="form__email--input"
+                required
+              />
+            </div>
+            <div class="form__message mb-[20px]">
+              <label for="message" class="form__message--label text-[14px]"
+                ><b>Message</b></label
+              >
+              <textarea
+                type="text"
+                name="message"
+                class="form__message--input"
+                required
+              ></textarea>
+            </div>
+            <button
+              id="contact__submit"
+              class="bg-violet-400 border-[2px] border-solid border-violet-400 w-full max-w-[240px] py-[12px] px-[24px] text-[20px] rounded-[10px] shadow-[0_20px_80px_0_rgba(245,245,244,0.15)] overflow-hidden hover:bg-transparent hover:border-white hover:ease-in-out hover:transition-all hover:duration-300 hover:scale-[0.98] active:outline active:outline-offset-2 active:outline-4 active:outline-violet-400 ease-in-out duration-300 form__submit"
+            >
+              <b>Send it my way!</b>
+            </button>
+          </form>
+          <!-- MODAL CLOSE -->
+          <img
+            src="assets/icons/close-bold-svgrepo-com.svg"
+            class="cursor-pointer h-8 w-8 absolute top-[30px] right-[40px] z-50 ease-in-out duration-300 hover:scale-110 hover:transition-all hover:duration-300 hover:ease-in-out active:scale-[0.80]"
+            onclick="toggleModal()"
+          />
+        </div>
+      </div>
+      <img
+        src="./assets/shapes/html-5-svgrepo-com.svg"
+        class="fixed top-[15vh] left-[5vw] -z-10 opacity-35 sm:opacity-75 shape fall shape--0"
+      />
+      <img
+        src="./assets/shapes/javascript-svgrepo-com.svg"
+        class="fixed top-[15vh] left-[50vw] -z-10 opacity-35 sm:opacity-75 shape spinner shape--1"
+      />
+      <img
+        src="./assets/shapes/github-fill-svgrepo-com.svg"
+        class="fixed top-[15vh] left-[85vw] -z-10 opacity-35 sm:opacity-75 fall shape shape--2"
+      />
+      <img
+        src="./assets/shapes/javascript-svgrepo-com.svg"
+        class="fixed top-[50vh] left-[5vw] -z-10 opacity-35 sm:opacity-75 shape spinner shape--3"
+      />
+      <img
+        src="./assets/shapes/css-3-svgrepo-com.svg"
+        class="fixed top-[50vh] left-[50vw] -z-10 opacity-35 sm:opacity-75 shape fall shape--4"
+      />
+      <img
+        src="./assets/shapes/javascript-svgrepo-com.svg"
+        class="fixed top-[50vh] left-[85vw] -z-10 opacity-35 sm:opacity-75 shape twister shape--5"
+      />
+      <img
+        src="./assets/shapes/github-fill-svgrepo-com.svg"
+        class="fixed top-[80vh] left-[5vw] -z-10 opacity-35 sm:opacity-75 spinner shape shape--6"
+      />
+      <img
+        src="./assets/shapes/javascript-svgrepo-com.svg"
+        class="fixed top-[80vh] left-[50vw] -z-10 opacity-35 sm:opacity-75 shape twister shape--7"
+      />
+      <img
+        src="./assets/shapes/html-5-svgrepo-com.svg"
+        class="fixed top-[80vh] left-[85vw] -z-10 opacity-35 sm:opacity-75 shape fall shape--8"
+      />
+    </section>
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <div class="container py-[50px] w-full mx-auto">
+        <div class="row w-full max-w-[1100px] my-0 md:px-5 px-2 mx-auto">
+          <!-- PROJECTS SECTION TITLE -->
+          <h1
+            class="text-[48px] mb-[60px] text-center section__title dark:text-stone-100 dark:transition-all dark:duration-700 dark:ease-in-out transition-all duration-700 ease-in-out"
+          >
+            <b
+              >Here are some of my
+              <span class="text-violet-400">projects</span></b
+            >
+          </h1>
+          <ul class="project___list">
+            <!-- PROJECT #1 -->
+            <li class="project md:mb-[135px] mb-[96px]">
+              <!-- PROJECT BACKGROUND -->
+              <div
+                class="relative project__wrapper overflow-hidden max-[480px]:flex max-[480px]:justify-center rounded-[20px] shadow-[0_20px_80px_0_rgba(0,0,0,0.45)] group"
+              >
+                <!-- Update img src / alt attribute  -->
+                <img
+                  class="group-hover:scale-[1.07] group-hover:blur-[5px] transition-all duration-[600ms] ease"
+                  src="./assets/images/computer-laptop-phone-screen-with-abstract-marble-aesthetic.jpg"
+                  alt="website mockup #1"
+                />
+                <!-- PROJECT WRAPPER--BG -->
+                <div
+                  class="project__wrapper--bg group-hover:bg-[#1c1d25]/[0.7] absolute top-0 left-0 w-full h-full"
+                ></div>
+                <!-- PROJECT DESCRIPTION -->
+                <div
+                  class="max-[480px]:text-center project__description absolute top-2/4 min-[480px]:left-[90px] max-w-[550px] text-white translate-y-full opacity-0 [transition:opacity_300ms,transform_450ms_ease-in-out] group-hover:-translate-y-2/4 group-hover:opacity-100 ease-in-out"
+                >
+                  <!-- PROJECT #1 TITLE -->
+                  <!-- Add project title -->
+                  <h3
+                    class="project__description--title text-[32px] min-[425px]:text-[40px]"
+                  >
+                    <b>Your Project Title</b>
+                  </h3>
+                  <!-- PROJECT #1 TECH STACK -->
+                  <!-- Add your tech skills used on project -->
+                  <h4
+                    class="project__description--sub-title mt-[16px] max-[480px]:my-[8px] max-[480px]:mt-0"
+                  >
+                    <b>HTML, CSS, JavaScript</b>
+                  </h4>
+                  <!-- PROJECT #1 PARA -->
+                  <!-- Add small description of project  -->
+                  <p
+                    class="project__description--para my-[16px] max-[480px]:hidden"
+                  >
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Cum saepe dicta molestias est culpa veniam consectetur magni
+                    at magnam totam.
+                    <a
+                      href="https://www.freepik.com/free-photo/computer-laptop-phone-screen-with-abstract-marble-aesthetic_20122890.htm#fromView=keyword&page=1&position=33&uuid=bfdd912d-f305-4d8f-8011-be1b95406984&query=Website+Mockup"
+                      >Image by rawpixel.com on Freepik</a
+                    >
+                  </p>
+                  <!-- PROJECT #1 LINKS -->
+                  <div
+                    class="flex max-[480px]:justify-center project__description--links"
+                  >
+                    <!-- GITHUB ICON LINK -->
+                    <!-- update href and alt with your project's GitHub link -->
+                    <a
+                      href="https://github.com/"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/github-142-svgrepo-com.svg"
+                        alt="GitHub logo"
+                        class="h-5"
+                      />
+                    </a>
+                    <!-- WEBLINK ICON LINK -->
+                    <!-- update href and alt with your project's website link -->
+                    <a
+                      href="https://github.com"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/web-link-svgrepo-com.svg"
+                        alt="Link logo"
+                        class="h-6"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- PROJECT #2 -->
+            <li class="project md:mb-[135px] mb-[96px]">
+              <!-- PROJECT BACKGROUND -->
+              <div
+                class="relative project__wrapper overflow-hidden max-[480px]:flex max-[480px]:justify-center rounded-[20px] shadow-[0_20px_80px_0_rgba(0,0,0,0.45)] group"
+              >
+                <!-- Update img src / alt attribute  -->
+                <img
+                  class="group-hover:scale-[1.07] group-hover:blur-[5px] transition-all duration-[600ms] ease"
+                  src="./assets/images/computer-laptop-phone-screen-with-abstract-marble-aesthetic.jpg"
+                  alt="website mockup #2"
+                />
+                <!-- PROJECT WRAPPER--BG -->
+                <div
+                  class="project__wrapper--bg group-hover:bg-[#1c1d25]/[0.7] absolute top-0 left-0 w-full h-full"
+                ></div>
+                <!-- PROJECT DESCRIPTION -->
+                <div
+                  class="max-[480px]:text-center project__description absolute top-2/4 min-[480px]:left-[90px] max-w-[550px] text-white translate-y-full opacity-0 [transition:opacity_300ms,transform_450ms_ease-in-out] group-hover:-translate-y-2/4 group-hover:opacity-100 ease-in-out"
+                >
+                  <!-- PROJECT #2 TITLE -->
+                  <!-- Add project title -->
+                  <h3
+                    class="project__description--title text-[32px] min-[425px]:text-[40px]"
+                  >
+                    <b>Your Project Title</b>
+                  </h3>
+                  <!-- PROJECT #2 TECH STACK -->
+                  <!-- Add your tech skills used on project -->
+                  <h4
+                    class="project__description--sub-title mt-[16px] max-[480px]:my-[8px] max-[480px]:mt-0"
+                  >
+                    <b>HTML, CSS, JavaScript</b>
+                  </h4>
+                  <!-- PROJECT #2 PARA -->
+                  <!-- Add small description of project  -->
+                  <p
+                    class="project__description--para my-[16px] max-[480px]:hidden"
+                  >
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Cum saepe dicta molestias est culpa veniam consectetur magni
+                    at magnam totam.
+                    <a
+                      href="https://www.freepik.com/free-photo/computer-laptop-phone-screen-with-abstract-marble-aesthetic_20122890.htm#fromView=keyword&page=1&position=33&uuid=bfdd912d-f305-4d8f-8011-be1b95406984&query=Website+Mockup"
+                      >Image by rawpixel.com on Freepik</a
+                    >
+                  </p>
+                  <!-- PROJECT #2 LINKS -->
+                  <div
+                    class="flex max-[480px]:justify-center project__description--links"
+                  >
+                    <!-- GITHUB ICON LINK -->
+                    <!-- update href and alt with your project's GitHub link -->
+                    <a
+                      href="https://github.com/"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/github-142-svgrepo-com.svg"
+                        alt="GitHub logo"
+                        class="h-5"
+                      />
+                    </a>
+                    <!-- WEBLINK ICON LINK -->
+                    <!-- update href and alt with your project's website link -->
+                    <a
+                      href="https://github.com"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/web-link-svgrepo-com.svg"
+                        alt="Link logo"
+                        class="h-6"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- PROJECT #3 -->
+            <li class="project md:mb-[135px] mb-[96px]">
+              <!-- PROJECT BACKGROUND -->
+              <div
+                class="relative project__wrapper overflow-hidden max-[480px]:flex max-[480px]:justify-center rounded-[20px] shadow-[0_20px_80px_0_rgba(0,0,0,0.45)] group"
+              >
+                <!-- Update img src / alt attribute  -->
+                <img
+                  class="group-hover:scale-[1.07] group-hover:blur-[5px] transition-all duration-[600ms] ease"
+                  src="./assets/images/computer-laptop-phone-screen-with-abstract-marble-aesthetic.jpg"
+                  alt="website mockup #3"
+                />
+                <!-- PROJECT WRAPPER--BG -->
+                <div
+                  class="project__wrapper--bg group-hover:bg-[#1c1d25]/[0.7] absolute top-0 left-0 w-full h-full"
+                ></div>
+                <!-- PROJECT DESCRIPTION -->
+                <div
+                  class="max-[480px]:text-center project__description absolute top-2/4 min-[480px]:left-[90px] max-w-[550px] text-white translate-y-full opacity-0 [transition:opacity_300ms,transform_450ms_ease-in-out] group-hover:-translate-y-2/4 group-hover:opacity-100 ease-in-out"
+                >
+                  <!-- PROJECT #3 TITLE -->
+                  <!-- Add project title -->
+                  <h3
+                    class="project__description--title text-[32px] min-[425px]:text-[40px]"
+                  >
+                    <b>Your Project Title</b>
+                  </h3>
+                  <!-- PROJECT #3 TECH STACK -->
+                  <!-- Add your tech skills used on project -->
+                  <h4
+                    class="project__description--sub-title mt-[16px] max-[480px]:my-[8px] max-[480px]:mt-0"
+                  >
+                    <b>HTML, CSS, JavaScript</b>
+                  </h4>
+                  <!-- PROJECT #3 PARA -->
+                  <!-- Add small description of project  -->
+                  <p
+                    class="project__description--para my-[16px] max-[480px]:hidden"
+                  >
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Cum saepe dicta molestias est culpa veniam consectetur magni
+                    at magnam totam.
+                    <a
+                      href="https://www.freepik.com/free-photo/computer-laptop-phone-screen-with-abstract-marble-aesthetic_20122890.htm#fromView=keyword&page=1&position=33&uuid=bfdd912d-f305-4d8f-8011-be1b95406984&query=Website+Mockup"
+                      >Image by rawpixel.com on Freepik</a
+                    >
+                  </p>
+                  <!-- PROJECT #3 LINKS -->
+                  <div
+                    class="flex max-[480px]:justify-center project__description--links"
+                  >
+                    <!-- GITHUB ICON LINK -->
+                    <!-- update href and alt with your project's GitHub link -->
+                    <a
+                      href="https://github.com/"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/github-142-svgrepo-com.svg"
+                        alt="GitHub logo"
+                        class="h-5"
+                      />
+                    </a>
+                    <!-- WEBLINK ICON LINK -->
+                    <!-- update href and alt with your project's website link -->
+                    <a
+                      href="https://github.com"
+                      target="_blank"
+                      class="flex items-center justify-center text-base no-underline h-7 w-7 text-stone-100 bg-violet-400 my-0 mr-3 rounded-full hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out"
+                    >
+                      <img
+                        src="assets/icons/web-link-svgrepo-com.svg"
+                        alt="Link logo"
+                        class="h-6"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <footer class="relative bg-[#242424] py-[6%] px-0">
+      <div class="container w-full py-[50px] mx-auto">
+        <div
+          class="flex flex-col items-center row max-w-[1100px] px-[12px] mx-auto my-0"
+        >
+          <a href="#" class="relative footer__anchor group">
+            <figure class="footer__logo">
+              <!-- Update src and alt attribute with your personal logo -->
+              <img
+                id="personal-logo"
+                src="./assets/icons/logo-icon.svg"
+                alt="personal logo"
+                class="hover:scale-[1.1] active:scale-[0.8] duration-300 ease-in-out [64px] h-[64px]"
+              />
+            </figure>
+            <span
+              class="opacity-0 absolute right-0 footer__logo--popper top-[16px] transition-all duration-300 ease-in-out text-white group-hover:opacity-100 group-hover:translate-x-14 group-hover:transition-all group-hover:duration-300"
+            >
+              Top
+              <i class="fas fa-arrow-up group-hover:animate-jump"></i>
+            </span>
+          </a>
+          <div
+            class="w-full footer__social--list max-w-[500px] md:max-w-[620px] lg:max-w-[740px] flex justify-around my-[28px] md:my-[36px] lg:my-[42px] ease-in-out relative"
+          >
+            <!-- Update href and alt attribute with your Github link -->
+            <a
+              href="#"
+              class="footer__links relative text-white md:text-xl lg:text-2xl no-underline hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-white before:absolute before:left-0 before:-bottom-[1px]"
+            >
+              GitHub
+            </a>
+            <!-- Update href and alt attribute with your LinkedIn link -->
+            <a
+              href="#"
+              class="footer__links relative text-white md:text-xl lg:text-2xl no-underline hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-white before:absolute before:left-0 before:-bottom-[1px]"
+            >
+              LinkedIn
+            </a>
+            <!-- Update href and alt attribute with your Resume link -->
+            <a
+              href="#"
+              class="footer__links relative text-white md:text-xl lg:text-2xl no-underline hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-white before:absolute before:left-0 before:-bottom-[1px]"
+            >
+              Resume
+            </a>
+            <!-- Update href and alt attribute with your Contact link -->
+            <a
+              href="#"
+              class="footer__links relative text-white md:text-xl lg:text-2xl no-underline hover:ease-in-out hover:before:scale-x-100 hover:before:origin-left before:w-full before:h-[3px] before:origin-right before:transition-transform hover:before:duration-[400ms] before:scale-x-0 before:bg-white before:absolute before:left-0 before:-bottom-[1px]"
+              onclick="toggleModal()"
+            >
+              Contact
+            </a>
+          </div>
+          <!-- Update copyright with your name -->
+          <div class="text-white footer__links footer__copyright lg:text-xl">
+            Copyright © 2024 John Doe
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
